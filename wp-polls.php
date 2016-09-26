@@ -1009,7 +1009,7 @@ function polls_archive() {
                 $poll_expiry_days = -1;
             } else {
                 $poll_end_date  = mysql2date(sprintf(__('%s @ %s', 'wp-polls'), get_option('date_format'), get_option('time_format')), gmdate('Y-m-d H:i:s', $polls_question['end']));
-                $poll_expiry_days = floor(($polls_question['end'] - time())/(60*60*24));
+                $poll_expiry_days = floor(($poll_end_date - time())/(60*60*24));
             }
         // Archive Poll Header
         $template_archive_header = removeslashes(get_option('poll_template_pollarchiveheader'));
