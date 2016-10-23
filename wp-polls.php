@@ -302,23 +302,21 @@ function check_allowtovote() {
     switch($allow_to_vote) {
         // Guests Only
         case 0:
-            if($user_ID > 0) {
-                return false;
-            }
-            return true;
+            $result=!($user_ID > 0);
             break;
         // Registered Users Only
         case 1:
-            if($user_ID == 0) {
-                return false;
-            }
-            return true;
+            $result=!($user_ID == 0);
             break;
         // Registered Users And Guests
         case 2:
         default:
-            return true;
+            $result= true;
     }
+	error_log($result);
+	$result=apply_filters( 'wp-polls-allow-to-vote', $result );
+	error_log($result);
+	return $result;
 }
 
 
